@@ -10,18 +10,22 @@ namespace WinWidgets{
 
     class Window{
     public:
-        enum WindowFlags{
-            NONE = 0,
-            RESIZEABLE = 1,
-            BORDERLESS = 2,
-            MINIMIZEABLE = 4,
-            MAXIMIZEABLE = 8,
-            ALWAYS_ON_TOP = 16
+        struct WindowFlags{
+            enum {
+                NONE = 0,
+                RESIZEABLE = 1,
+                BORDERLESS = 2,
+                MINIMIZEABLE = 4,
+                MAXIMIZEABLE = 8,
+                ALWAYS_ON_TOP = 16
+            };
         };
-        enum PositionFlags{
-            TOPMOST = 1,
-            BOTTOMMOST = 2,
-            NO_MOVE = 4
+        struct PositionFlags{
+            enum{
+                TOPMOST = 1,
+                BOTTOMMOST = 2,
+                NO_MOVE = 4
+            };
         };
     private:
         HWND TheWindow;
@@ -78,6 +82,12 @@ namespace WinWidgets{
             public:
                 virtual void call( Window* p, int msgname, std::vector<void*> args ) = 0;
             };
+            class _EventDataNoUser : public EventData{
+                void (*callback)(Window&, int messagename, std::vector<void*> args);
+            public:
+                _EventDataNoUser( int eventnam, void (*cb)(Window&, int messagename, std::vector<void*> args));
+                void call( Window* p, int msgname, std::vector<void*> args );
+            };
 
             template<class T> class _EventData : public EventData{
                 void (*callback)(Window&, int messagename, std::vector<void*> args, T userdata);
@@ -94,9 +104,11 @@ namespace WinWidgets{
         public:
             _Event( Window* p );
             ~_Event(); //REMEMBER TO FREE EVERYTHING IN THE VECTOR
-            template<class T> void Register( int eventname, void (*ev)(Window&,T userdata, std::vector<void*> args), T userdata ){
+            template<class T> void Register( int eventname, void (*ev)(Window&, std::vector<void*> args,T userdata), T userdata ){
                 Events.push_back(new _EventData<T>(eventname, ev, userdata ));
             }
+            void Register( int eventname, void (*ev)(Window&, std::vector<void*> args));
+
             void Unregister( int eventname );
         };
     public:
@@ -113,11 +125,12 @@ namespace WinWidgets{
         void Refresh();
         void Show();
         void Hide();
-        Window( WindowFlags flags = WindowFlags::NONE );
-        Window( int x, int y, int w, int h, std::string title, std::string winclass, WindowFlags flags = WindowFlags::NONE );
-        Window( int x, int y, Rect r, std::string title, std::string winclass, WindowFlags flags = WindowFlags::NONE );
-        Window( Rect r, std::string title, std::string winclass, WindowFlags flags = WindowFlags::NONE );
-        Window( Point p, std::string title, std::string winclass, Rect r, WindowFlags flags = WindowFlags::NONE );
+        Window( int flags = WindowFlags::NONE );
+        Window( int x, int y, int w, int h, std::string title, std::string winclass, int flags = WindowFlags::NONE );
+        Window( int x, int y, Rect r, std::string title, std::string winclass, int flags = WindowFlags::NONE );
+        Window( Rect r, std::string title, std::string winclass, int flags = WindowFlags::NONE );
+        Window( Point p, std::string title, std::string winclass, Rect r, int flags = WindowFlags::NONE );
+        ~Window();
     };
 }
 

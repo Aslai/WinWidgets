@@ -5,6 +5,8 @@
 using namespace WinWidgets;
 #include <windows.h>
 #include <vector>
+#include "menu.h"
+#include "trayicon.h"
 
 
 class A{
@@ -21,7 +23,17 @@ public:
     void call( int o ){
         e(data, o);
     }
+
 };
+template<class T> B<T>* create(void (*ee)(T,int), T d){
+        return new B<T>(ee,d);
+    }
+template<class T> B<T&>* create(void (*ee)(T&,int), T& d){
+        return new B<T&>(ee,d);
+    }
+
+
+
 
 std::vector<A*> as;
 
@@ -41,7 +53,6 @@ void func4(int &a, int b){
 
 
 int main(){
-    Window::Find::ByClass( "aa" );
     int t = 10;
     as.push_back( new B<int>(func1, 10) );
     as.push_back( new B<double>(func2, 50) );
@@ -50,7 +61,13 @@ int main(){
     as.push_back( new B<int&>(func4, t) );
     as.push_back( new B<int&>(func4, t) );
     as.push_back( new B<int&>(func4, t) );
-    as.push_back( new B<int&>(func4, t) );
+    as.push_back( create(func4, t) );
+    as.push_back( create(func4, t) );
+    as.push_back( create(func4, t) );
+    as.push_back( create(func4, t) );
+    as.push_back( create(func4, t) );
+
+
 
 
     for( int i = 0; i < as.size(); ++i ){

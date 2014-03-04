@@ -42,6 +42,9 @@ namespace WinWidgets{
     template <class T, T minimum, T maximum> ClampValue<T, minimum, maximum> operator<<( ClampValue<T, minimum, maximum> c, int v){return ClampValue<T, minimum, maximum>(c.Get() << v);}
     template <class T, T minimum, T maximum> ClampValue<T, minimum, maximum> operator>>( ClampValue<T, minimum, maximum> c, int v){return ClampValue<T, minimum, maximum>(c.Get() >> v);}
 
+    typedef ClampValue<int,0,255> ClampByte;
+    typedef ClampValue<double,0,1> ClampFloat;
+
 
     struct Point{
         int X, Y;
@@ -60,6 +63,9 @@ namespace WinWidgets{
     };
     struct Icon{
         HICON ico;
+    };
+    struct Cursor{
+        HCURSOR cur;
     };
 }
 
