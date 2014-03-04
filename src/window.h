@@ -33,11 +33,11 @@ namespace WinWidgets{
             Window* parent;
         public:
             _Set( Window* w );
-            void Position( Point p, PositionFlags flags );
-            void Position( int x, int y, PositionFlags flags );
+            void Position( Point p, int flags );
+            void Position( int x, int y, int flags );
             void Color(Color color);
-            void Color( ClampValue<int, 0, 255> red, ClampValue<int, 0, 255> green, ClampValue<int, 0, 255> blue, ClampValue<int, 0, 255> alpha = 255);
-            void Color( ClampValue<double, 0, 1> red, ClampValue<double, 0, 1> green, ClampValue<double, 0, 1> blue, ClampValue<double, 0, 1> alpha = 1);
+            void Color( ClampByte red, ClampByte green, ClampByte blue, ClampByte alpha = 255);
+            void Color( ClampFloat red, ClampFloat green, ClampFloat blue, ClampFloat alpha = 1);
             void Size( unsigned int w, unsigned int h );
             void Size( Rect r );
             void Title( std::string value );
@@ -47,7 +47,7 @@ namespace WinWidgets{
             Window* parent;
         public:
             _Get( Window* w );
-            Point Position( Point p, PositionFlags flags );
+            Point Position( Point p, int flags );
             WinWidgets::Color Color();
             WinWidgets::Icon Icon();
             std::string Title();
@@ -62,8 +62,8 @@ namespace WinWidgets{
                 _Set( _Draw* p );
                 void Brush( WinWidgets::Brush brush );
                 void Brush( WinWidgets::Color, int size, bool filled );
-                void Brush( ClampValue<int, 0, 255> red, ClampValue<int, 0, 255> green, ClampValue<int, 0, 255> blue, int size, bool filled );
-                void Brush( ClampValue<int, 0, 255> red, ClampValue<int, 0, 255> green, ClampValue<int, 0, 255> blue, ClampValue<int, 0, 255> alpha, int size, bool filled );
+                void Brush( ClampByte red, ClampByte green, ClampByte blue, int size, bool filled );
+                void Brush( ClampByte red, ClampByte green, ClampByte blue, ClampByte alpha, int size, bool filled );
             };
         public:
             _Set Set;

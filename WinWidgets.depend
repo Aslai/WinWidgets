@@ -1,16 +1,14 @@
 # depslib dependency file v1.0
-1393898595 source:c:\users\kaslai\docs\projects\winwidgets\src\window.cpp
-	"wintypes.h"
+1393914034 source:c:\users\kaslai\docs\projects\winwidgets\src\window.cpp
 	"window.h"
-	<stdio.h>
 	<windows.h>
 	<vector>
-	"menu.h"
+	<string>
 
-1393897011 c:\users\kaslai\docs\projects\winwidgets\src\wintypes.h
+1393913324 c:\users\kaslai\docs\projects\winwidgets\src\wintypes.h
 	<windows.h>
 
-1393900166 c:\users\kaslai\docs\projects\winwidgets\src\window.h
+1393913450 c:\users\kaslai\docs\projects\winwidgets\src\window.h
 	"wintypes.h"
 	<windows.h>
 	<vector>
@@ -21,4 +19,22 @@
 	<windows.h>
 	<vector>
 	<string>
+
+1393913856 source:c:\users\kaslai\docs\projects\winwidgets\main.cpp
+
+1393914100 source:c:\users\kaslai\docs\projects\winwidgets\src\trayicon.cpp
+	"wintypes.h"
+	<windows.h>
+	<vector>
+	<string>
+	"menu.h"
+	"trayicon.h"
+
+1393914081 c:\users\kaslai\docs\projects\winwidgets\src\trayicon.h
+	"wintypes.h"
+	<windows.h>
+	<vector>
+	<string>
+	"menu.h"
+	"window.h"
 

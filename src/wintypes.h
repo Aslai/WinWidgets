@@ -50,7 +50,7 @@ namespace WinWidgets{
         int X, Y;
     };
     struct Color{
-        ClampValue<int, 0, 255> r, g, b, a;
+       ClampByte r, g, b, a;
     };
     struct Brush{
         Color color;

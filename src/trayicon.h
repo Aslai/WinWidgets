@@ -6,6 +6,7 @@
 #include<vector>
 #include <string>
 #include "menu.h"
+#include "window.h"
 
 namespace WinWidgets{
     class TrayIcon{
@@ -33,6 +34,7 @@ namespace WinWidgets{
         TrayIcon();
         ~TrayIcon();
         _Set Set;
+        _Clear Clear;
         void Hide();
         void Show();
         void Remove();
