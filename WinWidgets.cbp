@@ -32,6 +32,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="main.cpp" />
+		<Unit filename="src/hook.h" />
+		<Unit filename="src/menu.cpp" />
+		<Unit filename="src/menu.h" />
+		<Unit filename="src/trayicon.cpp" />
+		<Unit filename="src/trayicon.h" />
 		<Unit filename="src/window.cpp" />
 		<Unit filename="src/window.h" />
 		<Unit filename="src/wintypes.h" />

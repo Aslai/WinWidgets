@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
-1393914034 source:c:\users\kaslai\docs\projects\winwidgets\src\window.cpp
+1393980287 source:c:\users\kaslai\docs\projects\winwidgets\src\window.cpp
 	"window.h"
 	<windows.h>
 	<vector>
 	<string>
+	"globals.h"
 
-1393913324 c:\users\kaslai\docs\projects\winwidgets\src\wintypes.h
+1393975387 c:\users\kaslai\docs\projects\winwidgets\src\wintypes.h
 	<windows.h>
 
-1393913450 c:\users\kaslai\docs\projects\winwidgets\src\window.h
+1393980059 c:\users\kaslai\docs\projects\winwidgets\src\window.h
 	"wintypes.h"
 	<windows.h>
 	<vector>
@@ -20,7 +21,8 @@
 	<vector>
 	<string>
 
-1393913856 source:c:\users\kaslai\docs\projects\winwidgets\main.cpp
+1393979908 source:c:\users\kaslai\docs\projects\winwidgets\main.cpp
+	"src/window.h"
 
 1393914100 source:c:\users\kaslai\docs\projects\winwidgets\src\trayicon.cpp
 	"wintypes.h"
@@ -37,4 +39,21 @@
 	<string>
 	"menu.h"
 	"window.h"
+
+1393914360 source:c:\users\kaslai\docs\projects\winwidgets\src\menu.cpp
+	"wintypes.h"
+	<windows.h>
+	<vector>
+	<string>
+	"menu.h"
+
+1393975784 source:c:\users\kaslai\docs\projects\winwidgets\src\globals.cpp
+	"globals.h"
+	<windows.h>
+
+1393976074 c:\users\kaslai\docs\projects\winwidgets\src\globals.h
+	"wintypes.h"
+	<windows.h>
+	<vector>
+	<string>
 

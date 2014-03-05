@@ -17,7 +17,8 @@ namespace WinWidgets{
                 BORDERLESS = 2,
                 MINIMIZEABLE = 4,
                 MAXIMIZEABLE = 8,
-                ALWAYS_ON_TOP = 16
+                ALWAYS_ON_TOP = 16,
+                NO_TASKBAR = 32
             };
         };
         struct PositionFlags{
@@ -28,7 +29,17 @@ namespace WinWidgets{
             };
         };
     private:
+        static std::vector<std::string> RegisteredClasses;
+        static std::vector<Window*> RegisteredWindows;
         HWND TheWindow;
+        std::string WinTitle, WinClass;
+        Window* MyParent;
+        int SpawnFlags;
+        Rect SpawnPosition;
+        static int running;
+
+        bool AlwaysOnTop;
+        bool HasSpawned;
         class _Set{
             Window* parent;
         public:
@@ -111,6 +122,8 @@ namespace WinWidgets{
 
             void Unregister( int eventname );
         };
+        static LRESULT CALLBACK windowprocedure( HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam );
+        void Spawn();
     public:
         class Find{
         public:
@@ -125,11 +138,13 @@ namespace WinWidgets{
         void Refresh();
         void Show();
         void Hide();
-        Window( int flags = WindowFlags::NONE );
-        Window( int x, int y, int w, int h, std::string title, std::string winclass, int flags = WindowFlags::NONE );
-        Window( int x, int y, Rect r, std::string title, std::string winclass, int flags = WindowFlags::NONE );
-        Window( Rect r, std::string title, std::string winclass, int flags = WindowFlags::NONE );
-        Window( Point p, std::string title, std::string winclass, Rect r, int flags = WindowFlags::NONE );
+        static void ProcessMessages();
+        Window( std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
+        Window( int x, int y, int w, int h, std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
+        Window( int x, int y, Rect r, std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
+        Window( Rect r, std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
+        Window( Point p, std::string title, std::string winclass, Rect r, Window* Parent = NULL, int flags = WindowFlags::NONE );
+        Window( HWND other );
         ~Window();
     };
 }

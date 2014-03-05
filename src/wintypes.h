@@ -47,7 +47,7 @@ namespace WinWidgets{
 
 
     struct Point{
-        int X, Y;
+        int x, y;
     };
     struct Color{
        ClampByte r, g, b, a;
