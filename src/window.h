@@ -10,31 +10,44 @@ namespace WinWidgets{
 
     class Window{
     public:
-        struct WindowFlags{
-            enum {
-                NONE = 0,
-                RESIZEABLE = 1,
-                BORDERLESS = 2,
-                MINIMIZEABLE = 4,
-                MAXIMIZEABLE = 8,
-                ALWAYS_ON_TOP = 16,
-                NO_TASKBAR = 32
-            };
+        enum State{
+            ON = 0,
+            OFF
         };
-        struct PositionFlags{
-            enum{
-                TOPMOST = 1,
-                BOTTOMMOST = 2,
-                NO_MOVE = 4
-            };
+        enum WindowFlags{
+            NONE = 0,
+            RESIZEABLE = 1,
+            BORDERLESS = 2,
+            MINIMIZEABLE = 4,
+            MAXIMIZEABLE = 8,
+            ALWAYS_ON_TOP = 16,
+            NO_TASKBAR = 32,
+            DROP_SHADOW = 64,
+            HAS_CLOSE_BUTTON = 128
+        };
+        enum PositionFlags{
+            TOPMOST = 1,
+            BOTTOMMOST = 2,
+            NO_MOVE = 4
         };
     private:
-        static std::vector<std::string> RegisteredClasses;
+        struct WindowClass{
+            std::string classname;
+            long long classflags;
+            Cursor cur;
+            Icon ico;
+            Icon smallico;
+
+            Color color;
+            int RegisteredWithWindows;
+        };
+        static std::vector<WindowClass*> RegisteredClasses;
         static std::vector<Window*> RegisteredWindows;
         HWND TheWindow;
         std::string WinTitle, WinClass;
+        WindowClass* MyClass;
         Window* MyParent;
-        int SpawnFlags;
+        WindowFlags SpawnFlags;
         Rect SpawnPosition;
         static int running;
 
@@ -44,8 +57,8 @@ namespace WinWidgets{
             Window* parent;
         public:
             _Set( Window* w );
-            void Position( Point p, int flags );
-            void Position( int x, int y, int flags );
+            void Position( Point p, Window::PositionFlags flags );
+            void Position( int x, int y, Window::PositionFlags flags );
             void Color(Color color);
             void Color( ClampByte red, ClampByte green, ClampByte blue, ClampByte alpha = 255);
             void Color( ClampFloat red, ClampFloat green, ClampFloat blue, ClampFloat alpha = 1);
@@ -122,6 +135,37 @@ namespace WinWidgets{
 
             void Unregister( int eventname );
         };
+        class _Class{
+            Window* parent;
+            class _Set{
+                _Class* parent;
+            public:
+                _Set( _Class* p );
+                void Cursor( WinWidgets::Cursor cur );
+                void Color( WinWidgets::Color col );
+                void Color( ClampByte r, ClampByte g, ClampByte b, ClampByte a = 255 );
+            };
+            class _EnableDisable{
+                _Class* parent;
+                int t;
+            public:
+                _EnableDisable( _Class* p, int type );
+                void DropShadow( );
+                void Border( );
+                void CloseButton( );
+                void Minimize( );
+                void Maximize( );
+                void Resizing( );
+                void AlwaysOnTop( );
+            };
+        public:
+            _Class( Window* p );
+            _Set Set;
+            _EnableDisable Enable;
+            _EnableDisable Disable;
+            friend _Set;
+            friend _EnableDisable;
+        };
         static LRESULT CALLBACK windowprocedure( HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam );
         void Spawn();
     public:
@@ -135,15 +179,17 @@ namespace WinWidgets{
         _Get Get;
         _Draw Draw;
         _Event Event;
+        _Class Class;
+
         void Refresh();
         void Show();
         void Hide();
         static void ProcessMessages();
-        Window( std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
-        Window( int x, int y, int w, int h, std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
-        Window( int x, int y, Rect r, std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
-        Window( Rect r, std::string title, std::string winclass, Window* Parent = NULL, int flags = WindowFlags::NONE );
-        Window( Point p, std::string title, std::string winclass, Rect r, Window* Parent = NULL, int flags = WindowFlags::NONE );
+        Window( std::string title, std::string winclass, Window* Parent = NULL, WindowFlags flags = WindowFlags::NONE );
+        Window( int x, int y, int w, int h, std::string title, std::string winclass, Window* Parent = NULL, WindowFlags flags = WindowFlags::NONE );
+        Window( int x, int y, Rect r, std::string title, std::string winclass, Window* Parent = NULL, WindowFlags flags = WindowFlags::NONE );
+        Window( Rect r, std::string title, std::string winclass, Window* Parent = NULL, WindowFlags flags = WindowFlags::NONE );
+        Window( Point p, std::string title, std::string winclass, Rect r, Window* Parent = NULL, WindowFlags flags = WindowFlags::NONE );
         Window( HWND other );
         ~Window();
     };

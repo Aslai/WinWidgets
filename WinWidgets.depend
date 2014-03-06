@@ -1,15 +1,17 @@
 # depslib dependency file v1.0
-1393980287 source:c:\users\kaslai\docs\projects\winwidgets\src\window.cpp
+1394060778 source:c:\users\kaslai\docs\projects\winwidgets\src\window.cpp
 	"window.h"
 	<windows.h>
 	<vector>
 	<string>
 	"globals.h"
+	"exception.h"
+	<stdio.h>
 
-1393975387 c:\users\kaslai\docs\projects\winwidgets\src\wintypes.h
+1394056115 c:\users\kaslai\docs\projects\winwidgets\src\wintypes.h
 	<windows.h>
 
-1393980059 c:\users\kaslai\docs\projects\winwidgets\src\window.h
+1394060678 c:\users\kaslai\docs\projects\winwidgets\src\window.h
 	"wintypes.h"
 	<windows.h>
 	<vector>
@@ -21,8 +23,10 @@
 	<vector>
 	<string>
 
-1393979908 source:c:\users\kaslai\docs\projects\winwidgets\main.cpp
+1394060778 source:c:\users\kaslai\docs\projects\winwidgets\main.cpp
 	"src/window.h"
+	"src/exception.h"
+	<stdio.h>
 
 1393914100 source:c:\users\kaslai\docs\projects\winwidgets\src\trayicon.cpp
 	"wintypes.h"
@@ -55,5 +59,11 @@
 	"wintypes.h"
 	<windows.h>
 	<vector>
+	<string>
+
+1394057472 source:c:\users\kaslai\docs\projects\winwidgets\src\exception.cpp
+	"exception.h"
+
+1394057472 c:\users\kaslai\docs\projects\winwidgets\src\exception.h
 	<string>
 

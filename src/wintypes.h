@@ -26,7 +26,7 @@ namespace WinWidgets{
         int operator>=(T other){return (value >= other);}
         int operator<=(T other){return (value <= other);}
         ClampValue<T, minimum, maximum>& operator%=(T other){return operator=(value % other);}
-        operator bool(){ return value?true:false; }
+        //operator bool(){ return value?true:false; }
         operator T(){ return value; }
     };
     template <class T, T minimum, T maximum> ClampValue<T, minimum, maximum> operator~( ClampValue<T, minimum, maximum> c ){return ClampValue<T, minimum, maximum>(~c.Get());}
@@ -51,6 +51,7 @@ namespace WinWidgets{
     };
     struct Color{
        ClampByte r, g, b, a;
+       bool IsSet;
     };
     struct Brush{
         Color color;
